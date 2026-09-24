@@ -12,7 +12,7 @@ pipeline {
         stage('Build') {
             steps {
                 bat 'python -m py_compile app.py'
-                bat 'timeout /t 15 /nobreak'
+                bat 'ping 127.0.0.1 -n 16 > nul'
                 milestone(1)
             }
         }
