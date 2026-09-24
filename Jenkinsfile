@@ -4,7 +4,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/msshabreena-coder/Jenkins-Q7.git'
+                git branch: 'main',
+                    url: 'https://github.com/msshabreena-coder/Jenkins-Q7.git'
             }
         }
 
@@ -18,9 +19,11 @@ pipeline {
 
         stage('Send Notification') {
             steps {
-                echo "To: msshabreena@gmail.com"
-                echo "Subject: ${JOB_NAME} - Build #${BUILD_NUMBER}"
-                echo "Build URL: ${BUILD_URL}"
+                mail(
+                    to: 'msshabreena@gmail.com',
+                    subject: "${JOB_NAME} - Build #${BUILD_NUMBER}",
+                    body: "Build URL: ${BUILD_URL}"
+                )
             }
         }
     }
